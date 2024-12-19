@@ -10,18 +10,24 @@ import com.kh.dev.student.control.ActionForward;
 import com.kh.dev.student.model.StudentDAO;
 import com.kh.dev.student.model.StudentVO;
 
-public class ModifyFormAction implements Action {
+public class DeleteProcAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
+		StudentDAO dao = StudentDAO.getInstance();
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		StudentVO svo = new StudentVO();
-		svo.setId(id);
-		StudentDAO dao = StudentDAO.getInstance();
-		svo = dao.selectOneDB(svo);
-		request.setAttribute("svo", svo);
-		return new ActionForward("/mvcmem/modifyForm.jsp", false);
+		String pass = request.getParameter("pass");
+		StudentVO vo = new StudentVO();
+		vo.setId(id);
+		vo.setPass(pass);
+		boolean flag = dao.deleteDB(vo);
+		if (flag == true) {
+			session.invalidate();
+		}
+		request.setAttribute("flag", flag);
+		return new ActionForward("/mvcmem/deleteProc.jsp", false);
 	}
+
 }
