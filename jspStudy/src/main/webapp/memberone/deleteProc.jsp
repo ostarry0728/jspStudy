@@ -1,4 +1,4 @@
-<%@page import="co.kh.dev.memberone.model.StudentVO"%>
+<%-- <%@page import="co.kh.dev.memberone.model.StudentVO"%>
 <%@page import="co.kh.dev.memberone.model.StudentDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
@@ -37,4 +37,4 @@ if (check == 1) {
 	</script>
 	<%
 	}
-	%>
+	%> --%>
